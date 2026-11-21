@@ -31,7 +31,14 @@ function initBrowserStorage() {
   try {
     const savedTickets = localStorage.getItem(STORAGE_KEY_TICKETS);
     if (savedTickets) {
-      localTickets = JSON.parse(savedTickets);
+      const parsed = JSON.parse(savedTickets);
+      // If cached data contains old dummy ids, auto-upgrade to real seed data
+      if (Array.isArray(parsed) && parsed.some((t: any) => t.id && t.id.includes('dummy-tk'))) {
+        localTickets = [...INITIAL_TICKETS];
+        localStorage.setItem(STORAGE_KEY_TICKETS, JSON.stringify(localTickets));
+      } else {
+        localTickets = parsed;
+      }
     } else {
       localStorage.setItem(STORAGE_KEY_TICKETS, JSON.stringify(localTickets));
     }

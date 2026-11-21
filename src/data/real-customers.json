@@ -1,0 +1,730 @@
+﻿[
+    {
+        "no":  "1",
+        "id_pelanggan":  "10010010110/16175",
+        "nama":  "HU. (E. Baesusi)",
+        "gol_tarif":  "SOS",
+        "total_tagihan":  "68.060"
+    },
+    {
+        "no":  "2",
+        "id_pelanggan":  "10010010571/16274",
+        "nama":  "TITIN RUSTINI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "320.780"
+    },
+    {
+        "no":  "3",
+        "id_pelanggan":  "10010010947/91333",
+        "nama":  "SITI RAHAYU",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "264.620"
+    },
+    {
+        "no":  "4",
+        "id_pelanggan":  "10010020055/16295",
+        "nama":  "Mahni",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "5",
+        "id_pelanggan":  "10010020290/16346",
+        "nama":  "Duloh",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "6",
+        "id_pelanggan":  "10010020330/16354",
+        "nama":  "Endang",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "7",
+        "id_pelanggan":  "10010020457/22091",
+        "nama":  "Dayat Hidayat",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "144.500"
+    },
+    {
+        "no":  "8",
+        "id_pelanggan":  "10010020484/33188",
+        "nama":  "Nazarudin Latif",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "9",
+        "id_pelanggan":  "10010020516/48910",
+        "nama":  "GUMILAR KHAERUL MUTAQIN",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "231.860"
+    },
+    {
+        "no":  "10",
+        "id_pelanggan":  "10010020902/16690",
+        "nama":  "Ujang Samsudin",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "11",
+        "id_pelanggan":  "10010030033/88198",
+        "nama":  "KARLAN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "12",
+        "id_pelanggan":  "10010050007/79315",
+        "nama":  "ADE KARYA",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "13",
+        "id_pelanggan":  "10010050060/16597",
+        "nama":  "Rahmat N",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "14",
+        "id_pelanggan":  "10010060024/51613",
+        "nama":  "I J A",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "177.260"
+    },
+    {
+        "no":  "15",
+        "id_pelanggan":  "10010060101/87719",
+        "nama":  "ANAH",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "177.260"
+    },
+    {
+        "no":  "16",
+        "id_pelanggan":  "10010060112/97417",
+        "nama":  "Erny Nuraini",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "114.860"
+    },
+    {
+        "no":  "17",
+        "id_pelanggan":  "10010060113/97658",
+        "nama":  "Eti",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "189.740"
+    },
+    {
+        "no":  "18",
+        "id_pelanggan":  "10010070087/52107",
+        "nama":  "NANANG B",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "19",
+        "id_pelanggan":  "10010070190/52349",
+        "nama":  "WAWAN GUNAWAN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "20",
+        "id_pelanggan":  "10010070191/52350",
+        "nama":  "A I P",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "97.700"
+    },
+    {
+        "no":  "21",
+        "id_pelanggan":  "10010077962/97566",
+        "nama":  "Yuli",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "22",
+        "id_pelanggan":  "10010080050/53594",
+        "nama":  "HENDRA ISKANDAR",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "114.860"
+    },
+    {
+        "no":  "23",
+        "id_pelanggan":  "10010080126/53903",
+        "nama":  "SMP N 4 WARUNG KIARA",
+        "gol_tarif":  "SOS",
+        "total_tagihan":  "267.740"
+    },
+    {
+        "no":  "24",
+        "id_pelanggan":  "10010080188/72211",
+        "nama":  "UTARI TRI MUMPUNI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "359.780"
+    },
+    {
+        "no":  "25",
+        "id_pelanggan":  "10010081254/52119",
+        "nama":  "ENDANG",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "133.580"
+    },
+    {
+        "no":  "26",
+        "id_pelanggan":  "10010081258/52390",
+        "nama":  "JEJEM JAENUDIN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "167.900"
+    },
+    {
+        "no":  "27",
+        "id_pelanggan":  "10010090078/70174",
+        "nama":  "HENDRO",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "224.060"
+    },
+    {
+        "no":  "28",
+        "id_pelanggan":  "10010090094/70183",
+        "nama":  "USUP SUPENDI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "152.300"
+    },
+    {
+        "no":  "29",
+        "id_pelanggan":  "10010090132/72805",
+        "nama":  "ADE",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "113.300"
+    },
+    {
+        "no":  "30",
+        "id_pelanggan":  "10010090227/72843",
+        "nama":  "EDI MULYADI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "305.180"
+    },
+    {
+        "no":  "31",
+        "id_pelanggan":  "10010090293/73003",
+        "nama":  "ICAH",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "32",
+        "id_pelanggan":  "10010100080/80377",
+        "nama":  "MULYANA YUSUP",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "186.620"
+    },
+    {
+        "no":  "33",
+        "id_pelanggan":  "10020010290/45797",
+        "nama":  "APIP ROHMAN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "186.620"
+    },
+    {
+        "no":  "34",
+        "id_pelanggan":  "10020020948/86258",
+        "nama":  "RIYANA",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "468.980"
+    },
+    {
+        "no":  "35",
+        "id_pelanggan":  "10020030334/52459",
+        "nama":  "EBAH SUAEBAH",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "36",
+        "id_pelanggan":  "10020050010/37927",
+        "nama":  "TATE KUSNANDAR",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "121.100"
+    },
+    {
+        "no":  "37",
+        "id_pelanggan":  "10020050136/37666",
+        "nama":  "YEYEP NURYEDIN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "186.620"
+    },
+    {
+        "no":  "38",
+        "id_pelanggan":  "10030010738/23152",
+        "nama":  "A d u n",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "39",
+        "id_pelanggan":  "10030020002/79910",
+        "nama":  "HENDRA FASHA",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "40",
+        "id_pelanggan":  "10030020454/72871",
+        "nama":  "ELIA LESMANAWATI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "144.500"
+    },
+    {
+        "no":  "41",
+        "id_pelanggan":  "10030030010/17102",
+        "nama":  "Edi Sakeli",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "133.580"
+    },
+    {
+        "no":  "42",
+        "id_pelanggan":  "10030030289/64389",
+        "nama":  "RINA ANDAENI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "43",
+        "id_pelanggan":  "10030030314/89895",
+        "nama":  "ENGKUS",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "121.100"
+    },
+    {
+        "no":  "44",
+        "id_pelanggan":  "10030050017/79453",
+        "nama":  "SITI NURLAELA",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "45",
+        "id_pelanggan":  "10030050563/31741",
+        "nama":  "Didi Raharja",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "46",
+        "id_pelanggan":  "10030050619/53969",
+        "nama":  "HJ. YAYANG",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "47",
+        "id_pelanggan":  "10030051043/87130",
+        "nama":  "SHINTIA  ALIANI P",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "180.380"
+    },
+    {
+        "no":  "48",
+        "id_pelanggan":  "10030051062/91354",
+        "nama":  "MURNI AYU LESTARI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "49",
+        "id_pelanggan":  "10030051116/99171",
+        "nama":  "Eko Sumardianto",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "50",
+        "id_pelanggan":  "10030060352/70609",
+        "nama":  "ERNI SUSANTI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "142.940"
+    },
+    {
+        "no":  "51",
+        "id_pelanggan":  "10030070018/85345",
+        "nama":  "HETI HERMAWAPI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "52",
+        "id_pelanggan":  "10030070240/17460",
+        "nama":  "Ayar",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "113.300"
+    },
+    {
+        "no":  "53",
+        "id_pelanggan":  "10030070320/17476",
+        "nama":  "H. Abdul Chaer",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "54",
+        "id_pelanggan":  "10030070438/91556",
+        "nama":  "NINING YUNINGSIH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "142.940"
+    },
+    {
+        "no":  "55",
+        "id_pelanggan":  "10030130312/80522",
+        "nama":  "DADIN",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "152.300"
+    },
+    {
+        "no":  "56",
+        "id_pelanggan":  "10030150036/95535",
+        "nama":  "LELA NURLAELA",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "133.580"
+    },
+    {
+        "no":  "57",
+        "id_pelanggan":  "10040010373/30308",
+        "nama":  "NURJANAH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "114.860"
+    },
+    {
+        "no":  "58",
+        "id_pelanggan":  "10040011943/97465",
+        "nama":  "AI NURPITASARI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "59",
+        "id_pelanggan":  "10040020035/13972",
+        "nama":  "Endang S (B)",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "60",
+        "id_pelanggan":  "10040020398/43717",
+        "nama":  "DEDI SUHENDI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "370.700"
+    },
+    {
+        "no":  "61",
+        "id_pelanggan":  "10040020883/58087",
+        "nama":  "ABDULLAH",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "62",
+        "id_pelanggan":  "10040021093/96431",
+        "nama":  "RYANDY FADLY",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "171.020"
+    },
+    {
+        "no":  "63",
+        "id_pelanggan":  "10040030515/14171",
+        "nama":  "H. Solihin",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "64",
+        "id_pelanggan":  "10040030580/14186",
+        "nama":  "Ujang R",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "65",
+        "id_pelanggan":  "10040034044/86699",
+        "nama":  "SUGIANTO",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "199.100"
+    },
+    {
+        "no":  "66",
+        "id_pelanggan":  "10040040345/14265",
+        "nama":  "Ade",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "67",
+        "id_pelanggan":  "10040050027/88498",
+        "nama":  "RUSMINI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "136.700"
+    },
+    {
+        "no":  "68",
+        "id_pelanggan":  "10040050028/88499",
+        "nama":  "TIA NOVIANTI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "214.700"
+    },
+    {
+        "no":  "69",
+        "id_pelanggan":  "10040050335/14356",
+        "nama":  "Mia",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "483.020"
+    },
+    {
+        "no":  "70",
+        "id_pelanggan":  "10040050792/50944",
+        "nama":  "SUMASNI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "71",
+        "id_pelanggan":  "10040050794/50946",
+        "nama":  "KIKI AYU DEWANTI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "152.300"
+    },
+    {
+        "no":  "72",
+        "id_pelanggan":  "10040050881/53767",
+        "nama":  "T I T I N",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "189.740"
+    },
+    {
+        "no":  "73",
+        "id_pelanggan":  "10040050982/78605",
+        "nama":  "Iva Sopiah",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "74",
+        "id_pelanggan":  "10040070469/31885",
+        "nama":  "E Rustam",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "152.300"
+    },
+    {
+        "no":  "75",
+        "id_pelanggan":  "10040080148/22634",
+        "nama":  "Erik Setia",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "124.220"
+    },
+    {
+        "no":  "76",
+        "id_pelanggan":  "10040080437/77535",
+        "nama":  "PIPIH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "77",
+        "id_pelanggan":  "10040080487/38698",
+        "nama":  "ETI ROHAYATI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "180.380"
+    },
+    {
+        "no":  "78",
+        "id_pelanggan":  "10040080908/63137",
+        "nama":  "MARWAN / IIS",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "128.900"
+    },
+    {
+        "no":  "79",
+        "id_pelanggan":  "10040080955/71766",
+        "nama":  "SEPYANDRI NUGRAHA",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "80",
+        "id_pelanggan":  "10040081042/84065",
+        "nama":  "DWI PURNOMO",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "81",
+        "id_pelanggan":  "10040081082/94917",
+        "nama":  "DEDE YATI ROHAYATI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "171.020"
+    },
+    {
+        "no":  "82",
+        "id_pelanggan":  "10040100103/55487",
+        "nama":  "ATIKAH (S-4)",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "220.940"
+    },
+    {
+        "no":  "83",
+        "id_pelanggan":  "10040100121/56876",
+        "nama":  "SITI AISAH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "84",
+        "id_pelanggan":  "10040101091/74318",
+        "nama":  "GENTA",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "253.700"
+    },
+    {
+        "no":  "85",
+        "id_pelanggan":  "10040101093/71453",
+        "nama":  "NURRANTI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "97.700"
+    },
+    {
+        "no":  "86",
+        "id_pelanggan":  "10040101252/87259",
+        "nama":  "ERNI HADIANTINI",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "87",
+        "id_pelanggan":  "10040101304/99305",
+        "nama":  "Sri Mulyati",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "88",
+        "id_pelanggan":  "10040120050/45312",
+        "nama":  "DJOKO PRIYANTO",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "89",
+        "id_pelanggan":  "10040120176/55970",
+        "nama":  "ANDRI SUFIAN (C-3)",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "133.580"
+    },
+    {
+        "no":  "90",
+        "id_pelanggan":  "10040140023/49473",
+        "nama":  "FENDERAMA K. (B2 - 8)",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "171.020"
+    },
+    {
+        "no":  "91",
+        "id_pelanggan":  "10040140052/49502",
+        "nama":  "SYAHRIL HASAN (D3 - 6)",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "92",
+        "id_pelanggan":  "10040140112/55546",
+        "nama":  "HAPID (F-15)",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "231.860"
+    },
+    {
+        "no":  "93",
+        "id_pelanggan":  "10050077977/73545",
+        "nama":  "DARNINTO",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "144.500"
+    },
+    {
+        "no":  "94",
+        "id_pelanggan":  "10050091135/63424",
+        "nama":  "OSIR",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "95",
+        "id_pelanggan":  "10050100487/67819",
+        "nama":  "YADI SURYADI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "136.700"
+    },
+    {
+        "no":  "96",
+        "id_pelanggan":  "10060020012/77513",
+        "nama":  "IIS lISDAWATI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "152.300"
+    },
+    {
+        "no":  "97",
+        "id_pelanggan":  "10060020269/32373",
+        "nama":  "Nuryanti",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "98",
+        "id_pelanggan":  "10060020637/56240",
+        "nama":  "ENGKOS KOSASIH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "99",
+        "id_pelanggan":  "10060021013/67561",
+        "nama":  "AAM",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "180.380"
+    },
+    {
+        "no":  "100",
+        "id_pelanggan":  "10060021172/72302",
+        "nama":  "TENTI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "177.260"
+    },
+    {
+        "no":  "101",
+        "id_pelanggan":  "10060021374/93510",
+        "nama":  "EPIH",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    },
+    {
+        "no":  "102",
+        "id_pelanggan":  "10060030033/77517",
+        "nama":  "DIDI SURYADI",
+        "gol_tarif":  "RT. B",
+        "total_tagihan":  "89.900"
+    },
+    {
+        "no":  "103",
+        "id_pelanggan":  "10060080835/98307",
+        "nama":  "REKSI FAUZI  (BLOK 21 - 13 )",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "275.540"
+    },
+    {
+        "no":  "104",
+        "id_pelanggan":  "10060080837/98305",
+        "nama":  "Dede Yudiana",
+        "gol_tarif":  "RT. C",
+        "total_tagihan":  "105.500"
+    }
+]

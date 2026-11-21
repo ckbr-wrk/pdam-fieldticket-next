@@ -11,13 +11,14 @@ export type TicketStatus =
   | 'DITUGASKAN'
   | 'DALAM_PROSES'
   | 'MENUNGGU'
+  | 'SELESAI'
   | 'SELESAI_DIKERJAKAN'
   | 'DITUTUP'
   | 'DIBATALKAN';
 
 export type Priority = 'KRITIS' | 'TINGGI' | 'SEDANG' | 'RENDAH';
 
-export type PhotoType = 'SEBELUM' | 'PROSES' | 'SESUDAH';
+export type PhotoType = 'SEBELUM' | 'PROSES' | 'SESUDAH' | 'KONDISI_AWAL';
 
 export interface User {
   id?: string;
@@ -42,6 +43,8 @@ export interface Wilayah {
   id: string;
   nama: string;
   petugas: string;
+  lat?: number;
+  lng?: number;
   aktif: boolean;
 }
 
@@ -97,10 +100,11 @@ export interface ProgressLog {
 export interface Photo {
   id: string;
   ticket_id: string;
-  uploader_id: string;
+  uploader_id?: string;
   tipe_foto: PhotoType;
-  file_url: string;
+  file_url?: string;
   file_path?: string;
+  drive_file_id?: string;
   created_at: string;
 }
 
@@ -162,6 +166,14 @@ export const STATUS_TRANSITIONS: Record<TicketStatus, Partial<Record<UserRole, T
     petugas_baca: [],
     kas: [],
     kepala_cabang: ['DIBATALKAN'],
+  },
+  SELESAI: {
+    admin: ['DITUTUP', 'DALAM_PROSES'],
+    kaur: ['DITUTUP', 'DALAM_PROSES'],
+    petugas_teknik: [],
+    petugas_baca: [],
+    kas: ['DITUTUP'],
+    kepala_cabang: ['DITUTUP'],
   },
   SELESAI_DIKERJAKAN: {
     admin: ['DITUTUP', 'DALAM_PROSES'],

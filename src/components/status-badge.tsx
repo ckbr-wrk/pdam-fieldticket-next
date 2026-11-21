@@ -24,6 +24,10 @@ export function StatusBadge({ status, size = 'md' }: StatusBadgeProps) {
       label: 'Menunggu',
       style: { background: '#FFFBEB', color: '#D97706' },
     },
+    SELESAI: {
+      label: 'Selesai',
+      style: { background: '#E6F4EA', color: '#137333' },
+    },
     SELESAI_DIKERJAKAN: {
       label: 'Selesai',
       style: { background: '#E6F4EA', color: '#137333' },

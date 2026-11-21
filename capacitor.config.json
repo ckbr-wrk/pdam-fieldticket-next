@@ -3,6 +3,7 @@
   "appName": "Field Ticket Cikembar",
   "webDir": "public",
   "server": {
+    "url": "https://pdam-fieldticket-next.vercel.app",
     "androidScheme": "https",
     "cleartext": true
   },
