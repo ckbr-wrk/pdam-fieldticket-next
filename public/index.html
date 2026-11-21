@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>PDAM FieldTicket</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0A1F44;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3.5px solid rgba(255,255,255,0.2);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <img src="logo-pdam.png" alt="PDAM" style="width: 72px; height: 72px; background: white; border-radius: 18px; padding: 4px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.4);" />
+  <div class="spinner"></div>
+  <p style="margin-top: 16px; font-weight: 700; font-size: 15px; letter-spacing: 0.3px;">Memuat FieldTicket Cikembar...</p>
+  <script>
+    // In Capacitor, if hosted server.url is configured in capacitor.config.json, it loads that.
+    // Otherwise fallback to root
+    if (window.location.pathname.endsWith('index.html')) {
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

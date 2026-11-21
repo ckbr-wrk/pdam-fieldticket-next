@@ -1,0 +1,12 @@
+{
+  "appId": "com.pdam.fieldticket",
+  "appName": "Field Ticket Cikembar",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
