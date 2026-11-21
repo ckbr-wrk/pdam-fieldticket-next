@@ -32,8 +32,13 @@ export default function RootLayout({
           <Navbar />
 
           {/* Main App Content */}
-          <main className="min-[900px]:ml-[240px] pt-16 min-[900px]:pt-20 pb-24 min-[900px]:pb-8 px-3.5 sm:px-6 lg:px-8 max-w-[1280px]">
-            {children}
+          <main
+            id="app-content"
+            className="min-[900px]:ml-[var(--side)] pt-[var(--hdr)] min-[900px]:pt-16 pb-[calc(var(--nav)+8px)] min-[900px]:pb-6"
+          >
+            <div className="view-container">
+              {children}
+            </div>
           </main>
 
           {/* Mobile Bottom Navigation (< 900px) */}

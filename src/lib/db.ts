@@ -32,8 +32,8 @@ function initBrowserStorage() {
     const savedTickets = localStorage.getItem(STORAGE_KEY_TICKETS);
     if (savedTickets) {
       const parsed = JSON.parse(savedTickets);
-      // If cached data contains old dummy ids, auto-upgrade to real seed data
-      if (Array.isArray(parsed) && parsed.some((t: any) => t.id && t.id.includes('dummy-tk'))) {
+      // If cached data is outdated (less than 165 real tickets or has old dummy tickets), auto-upgrade
+      if (!Array.isArray(parsed) || parsed.length < 165 || parsed.some((t: any) => (t.id && t.id.includes('dummy-tk')) || (t.ticket_id && t.ticket_id.includes('dummy-tk')))) {
         localTickets = [...INITIAL_TICKETS];
         localStorage.setItem(STORAGE_KEY_TICKETS, JSON.stringify(localTickets));
       } else {
@@ -253,6 +253,7 @@ export const dbService = {
 
     const newTicket: Ticket = {
       id,
+      ticket_id: id,
       nomor_tiket,
       pelapor_id: payload.pelapor_id,
       pelapor_nama: payload.pelapor_nama,

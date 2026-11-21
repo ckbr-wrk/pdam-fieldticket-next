@@ -1,29 +1,40 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { dbService } from '@/lib/db';
-import { Ticket, Wilayah, Category, Priority, TicketStatus } from '@/types';
+import { Ticket, Wilayah } from '@/types';
 import { StatusBadge } from '@/components/status-badge';
 import { PriorityBadge } from '@/components/priority-badge';
-import {
-  Search,
-  Filter,
-  Plus,
-  LayoutList,
-  LayoutGrid,
-  ChevronRight,
-  MapPin,
-  Clock,
-  User,
-  Wrench,
-  RotateCcw,
-} from 'lucide-react';
+
+const STATUS_CHIPS = [
+  { id: 'SEMUA', label: 'Semua' },
+  { id: 'BARU', label: 'Baru' },
+  { id: 'DITUGASKAN', label: 'Ditugaskan' },
+  { id: 'DALAM_PROSES', label: 'Dalam Proses' },
+  { id: 'MENUNGGU', label: 'Menunggu' },
+  { id: 'SELESAI_DIKERJAKAN', label: 'Selesai' },
+  { id: 'DITUTUP', label: 'Ditutup' },
+  { id: 'DIBATALKAN', label: 'Dibatalkan' },
+];
+
+function getStatusClass(status: string) {
+  const map: Record<string, string> = {
+    BARU: 'bd-baru',
+    DITUGASKAN: 'bd-ditugaskan',
+    DALAM_PROSES: 'bd-dalam-proses',
+    MENUNGGU: 'bd-menunggu',
+    SELESAI_DIKERJAKAN: 'bd-selesai-dikerjakan',
+    DITUTUP: 'bd-ditutup',
+    DIBATALKAN: 'bd-dibatalkan',
+  };
+  return map[status] || '';
+}
 
 export default function TicketsListPage() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [wilayahList, setWilayahList] = useState<Wilayah[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [allTickets, setAllTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Filters
@@ -32,18 +43,17 @@ export default function TicketsListPage() {
   const [filterPrioritas, setFilterPrioritas] = useState('SEMUA');
   const [filterWilayah, setFilterWilayah] = useState('SEMUA');
   const [showFilterPanel, setShowFilterPanel] = useState(false);
-  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [wils, cats] = await Promise.all([
+        const [wils, data] = await Promise.all([
           dbService.getWilayah(),
-          dbService.getCategories(),
+          dbService.getTickets(),
         ]);
         setWilayahList(wils);
-        setCategories(cats);
-        await fetchTickets();
+        setAllTickets(data);
+        setTickets(data);
       } catch (e) {
         console.error(e);
       } finally {
@@ -53,143 +63,127 @@ export default function TicketsListPage() {
     loadData();
   }, []);
 
-  const fetchTickets = async () => {
-    setLoading(true);
-    try {
-      const data = await dbService.getTickets({
-        status: filterStatus !== 'SEMUA' ? filterStatus : undefined,
-        prioritas: filterPrioritas !== 'SEMUA' ? filterPrioritas : undefined,
-        wilayah_id: filterWilayah !== 'SEMUA' ? filterWilayah : undefined,
-        search: search.trim() || undefined,
-      });
-      setTickets(data);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoading(false);
+  const applyFilters = useCallback(() => {
+    let result = [...allTickets];
+    if (filterStatus !== 'SEMUA') {
+      result = result.filter((t) => t.status === filterStatus);
     }
-  };
+    if (filterPrioritas !== 'SEMUA') {
+      result = result.filter((t) => t.prioritas === filterPrioritas);
+    }
+    if (filterWilayah !== 'SEMUA') {
+      result = result.filter((t) => t.wilayah_id === filterWilayah);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (t) =>
+          t.nomor_tiket?.toLowerCase().includes(q) ||
+          t.nama_pelanggan?.toLowerCase().includes(q) ||
+          t.wilayah_nama?.toLowerCase().includes(q) ||
+          t.deskripsi?.toLowerCase().includes(q) ||
+          t.kategori_nama?.toLowerCase().includes(q)
+      );
+    }
+    setTickets(result);
+  }, [allTickets, filterStatus, filterPrioritas, filterWilayah, search]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchTickets();
-    }, 200);
+    const timer = setTimeout(applyFilters, 150);
     return () => clearTimeout(timer);
-  }, [filterStatus, filterPrioritas, filterWilayah, search]);
+  }, [applyFilters]);
 
-  const statusPills: { id: string; label: string }[] = [
-    { id: 'SEMUA', label: 'Semua' },
-    { id: 'BARU', label: 'Baru' },
-    { id: 'DITUGASKAN', label: 'Ditugaskan' },
-    { id: 'DALAM_PROSES', label: 'Proses' },
-    { id: 'MENUNGGU', label: 'Menunggu' },
-    { id: 'SELESAI_DIKERJAKAN', label: 'Selesai' },
-    { id: 'DITUTUP', label: 'Ditutup' },
-  ];
+  const activeFilterCount = [
+    filterStatus !== 'SEMUA',
+    filterPrioritas !== 'SEMUA',
+    filterWilayah !== 'SEMUA',
+  ].filter(Boolean).length;
 
   return (
-    <div className="space-y-3 max-w-[1200px] mx-auto">
-      {/* ── Search & Filter Toggle Bar ───────────────────────────────────────── */}
-      <div className="flex gap-2 items-center">
-        <div className="relative flex-1">
+    <div>
+      {/* ── Page Header ─────────────────────────────────────────────── */}
+      <div className="page-header">
+        <div>
+          <h2>Daftar Tiket</h2>
+          <p className="page-sub">Semua tiket pengaduan &amp; gangguan PDAM Cikembar</p>
+        </div>
+        <Link href="/tickets/new" className="btn btn-primary btn-sm">
+          + Buat Tiket
+        </Link>
+      </div>
+
+      {/* ── Search Bar ──────────────────────────────────────────────── */}
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 10 }}>
+        <div style={{ position: 'relative', flex: 1 }}>
           <input
             type="search"
             placeholder="Cari apa saja (nomor tiket, nama, wilayah, keluhan)..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2.5 rounded-[12px] border border-[#CBD5E1] bg-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#0B57D0] focus:border-transparent shadow-sm"
+            className="form-control"
+            style={{ paddingLeft: 38 }}
           />
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <svg
+            viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            style={{ width: 17, height: 17, stroke: 'var(--muted)', position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+          >
+            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
         </div>
 
         <button
           type="button"
           onClick={() => setShowFilterPanel(!showFilterPanel)}
-          className={`px-3.5 py-2.5 rounded-[12px] border text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm whitespace-nowrap ${
-            showFilterPanel || filterStatus !== 'SEMUA' || filterPrioritas !== 'SEMUA' || filterWilayah !== 'SEMUA'
-              ? 'bg-blue-50 border-blue-300 text-[#0B57D0]'
-              : 'bg-white border-[#CBD5E1] text-slate-700 hover:bg-slate-50'
-          }`}
+          className={`btn btn-sm${showFilterPanel || activeFilterCount > 0 ? ' btn-primary' : ' btn-secondary'}`}
+          style={{ position: 'relative', whiteSpace: 'nowrap' }}
         >
-          <Filter className="w-4 h-4" />
-          <span className="hidden sm:inline">Filter</span>
+          <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 15, height: 15, stroke: 'currentColor', display: 'inline-block', marginRight: 4 }}>
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+          </svg>
+          Filter
+          {activeFilterCount > 0 && (
+            <span style={{
+              position: 'absolute', top: -6, right: -6, background: '#E53935', color: '#fff',
+              borderRadius: 10, fontSize: 10, minWidth: 17, height: 17, display: 'flex',
+              alignItems: 'center', justifyContent: 'center', padding: '0 4px', fontWeight: 700,
+            }}>
+              {activeFilterCount}
+            </span>
+          )}
         </button>
-
-        <div className="hidden sm:flex items-center bg-white rounded-[12px] border border-[#CBD5E1] p-1 shadow-sm">
-          <button
-            type="button"
-            onClick={() => setViewMode('cards')}
-            className={`p-1.5 rounded-lg transition-colors ${
-              viewMode === 'cards' ? 'bg-blue-100 text-[#0B57D0]' : 'text-slate-400 hover:text-slate-700'
-            }`}
-            title="Kartu"
-          >
-            <LayoutGrid className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('table')}
-            className={`p-1.5 rounded-lg transition-colors ${
-              viewMode === 'table' ? 'bg-blue-100 text-[#0B57D0]' : 'text-slate-400 hover:text-slate-700'
-            }`}
-            title="Tabel"
-          >
-            <LayoutList className="w-4 h-4" />
-          </button>
-        </div>
       </div>
 
-      {/* ── Status Filter Horizontal Pills (Identik style.css pill) ─────────── */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-        {statusPills.map((pill) => {
-          const active = filterStatus === pill.id;
-          return (
-            <button
-              key={pill.id}
-              type="button"
-              onClick={() => setFilterStatus(pill.id)}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-sm ${
-                active
-                  ? 'bg-[#0B57D0] text-white shadow-blue-500/30'
-                  : 'bg-white border border-[#E1E6EF] text-slate-600 hover:bg-slate-50'
-              }`}
-            >
-              {pill.label}
-            </button>
-          );
-        })}
+      {/* ── Status Chips ─────────────────────────────────────────────── */}
+      <div className="chips" style={{ marginBottom: 10 }}>
+        {STATUS_CHIPS.map((chip) => (
+          <button
+            key={chip.id}
+            type="button"
+            onClick={() => setFilterStatus(chip.id)}
+            className={`chip${filterStatus === chip.id ? ' active' : ''}`}
+          >
+            {chip.label}
+          </button>
+        ))}
       </div>
 
-      {/* ── Collapsible Advanced Filter Panel ────────────────────────────────── */}
+      {/* ── Filter Panel ─────────────────────────────────────────────── */}
       {showFilterPanel && (
-        <div className="bg-[#F8FAFC] border border-[#CBD5E1] rounded-[14px] p-4 shadow-sm space-y-3 animate-in fade-in zoom-in-95">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <h4 className="font-bold text-xs sm:text-sm text-[#0F172A] m-0">
-              ⚙️ Pengaturan Filter Lengkap
-            </h4>
+        <div className="card card-flat" style={{ background: '#F8FAFC', border: '1px solid var(--border)', marginBottom: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+            <h4 style={{ margin: 0 }}>⚙️ Filter Lanjutan</h4>
             <button
               type="button"
-              onClick={() => {
-                setFilterStatus('SEMUA');
-                setFilterPrioritas('SEMUA');
-                setFilterWilayah('SEMUA');
-                setSearch('');
-              }}
-              className="text-xs text-[#0B57D0] hover:underline font-bold flex items-center gap-1"
+              onClick={() => { setFilterStatus('SEMUA'); setFilterPrioritas('SEMUA'); setFilterWilayah('SEMUA'); setSearch(''); }}
+              className="btn btn-sm btn-secondary"
             >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset Filter</span>
+              Reset Filter
             </button>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">Prioritas Penanganan (SLA)</label>
-              <select
-                value={filterPrioritas}
-                onChange={(e) => setFilterPrioritas(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
-              >
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label>Prioritas</label>
+              <select value={filterPrioritas} onChange={(e) => setFilterPrioritas(e.target.value)} className="form-control">
                 <option value="SEMUA">Semua Prioritas</option>
                 <option value="KRITIS">KRITIS (SLA 2 Jam)</option>
                 <option value="TINGGI">TINGGI (SLA 6 Jam)</option>
@@ -197,19 +191,12 @@ export default function TicketsListPage() {
                 <option value="RENDAH">RENDAH (SLA 72 Jam)</option>
               </select>
             </div>
-
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">Wilayah / Blok Distribusi</label>
-              <select
-                value={filterWilayah}
-                onChange={(e) => setFilterWilayah(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white truncate"
-              >
-                <option value="SEMUA">Semua 50 Wilayah</option>
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label>Wilayah</label>
+              <select value={filterWilayah} onChange={(e) => setFilterWilayah(e.target.value)} className="form-control">
+                <option value="SEMUA">Semua Wilayah</option>
                 {wilayahList.map((w) => (
-                  <option key={w.id} value={w.id}>
-                    {w.nama} ({w.petugas})
-                  </option>
+                  <option key={w.id} value={w.id}>{w.nama}</option>
                 ))}
               </select>
             </div>
@@ -217,148 +204,79 @@ export default function TicketsListPage() {
         </div>
       )}
 
-      {/* ── Ticket Presentation ──────────────────────────────────────────────── */}
+      {/* ── Counter ──────────────────────────────────────────────────── */}
+      <div style={{ fontSize: 12.5, color: 'var(--muted)', marginBottom: 8 }}>
+        Menampilkan <strong style={{ color: 'var(--navy)' }}>{tickets.length}</strong> dari <strong style={{ color: 'var(--navy)' }}>{allTickets.length}</strong> tiket
+      </div>
+
+      {/* ── Ticket List (tk-item style) ───────────────────────────────── */}
       {loading ? (
-        <div className="p-12 text-center text-slate-400 text-xs bg-white rounded-[14px] border border-[#E1E6EF]">
-          Memuat tiket...
-        </div>
+        <div className="loading-text">Memuat tiket...</div>
       ) : tickets.length === 0 ? (
-        <div className="p-10 text-center bg-white rounded-[14px] border border-[#E1E6EF] space-y-2">
-          <div className="font-bold text-sm text-slate-800">Tidak ada tiket ditemukan</div>
-          <p className="text-xs text-slate-500">Coba ubah kriteria pencarian atau filter status.</p>
+        <div className="empty-state">
+          <div style={{ fontSize: 36, marginBottom: 10 }}>📭</div>
+          <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Tidak ada tiket ditemukan</div>
+          <p className="text-muted text-sm">Coba ubah kriteria pencarian atau filter status.</p>
         </div>
-      ) : viewMode === 'cards' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 min-[1000px]:grid-cols-3 gap-3">
+      ) : (
+        <div className="tl-cards">
           {tickets.map((t) => (
             <Link
               key={t.id}
               href={`/tickets/${t.id}`}
-              className="bg-white rounded-[14px] border border-[#E1E6EF] p-4 shadow-sm hover:shadow-md hover:border-[#0B57D0]/40 transition-all flex flex-col justify-between group"
+              className={`tk-item ${getStatusClass(t.status)}`}
+              style={{ textDecoration: 'none' }}
             >
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono text-xs font-black text-[#0B57D0]">
-                    {t.nomor_tiket}
-                  </span>
-                  <StatusBadge status={t.status} size="sm" />
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <PriorityBadge prioritas={t.prioritas} />
-                    {t.ukuran_pipa && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                        {t.ukuran_pipa}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-bold text-xs sm:text-sm text-[#0A1F44] truncate group-hover:text-[#0B57D0] transition-colors m-0">
-                    {t.nama_pelanggan}
-                  </h3>
-                  <div className="text-[11px] text-[#0B57D0] font-semibold truncate">
-                    {t.kategori_nama}
-                  </div>
-                  <p className="text-xs text-slate-600 line-clamp-2 mt-1">
-                    {t.deskripsi}
-                  </p>
-                </div>
-
-                <div className="text-[11px] text-slate-500 space-y-1 pt-2 border-t border-slate-100">
-                  <div className="flex items-center gap-1.5 truncate">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span className="truncate">{t.wilayah_nama || 'Cikembar'}</span>
-                  </div>
-                  {t.assigned_to_nama && (
-                    <div className="flex items-center gap-1.5 text-purple-700 font-semibold truncate">
-                      <Wrench className="w-3.5 h-3.5 shrink-0" />
-                      <span>Teknisi: {t.assigned_to_nama}</span>
-                    </div>
-                  )}
-                </div>
+              <div className="tk-pin">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
               </div>
-
-              <div className="flex items-center justify-between text-[10.5px] text-slate-400 pt-2.5 mt-2.5 border-t border-slate-100">
-                <div className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
+              <div className="tk-main">
+                <div className="tk-top">
+                  <span className="tk-no">{t.nomor_tiket}</span>
+                  <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                    <StatusBadge status={t.status} size="sm" />
+                    <PriorityBadge prioritas={t.prioritas} showSla={false} />
+                  </div>
+                </div>
+                <div className="tk-cat">
+                  <strong>{t.nama_pelanggan}</strong>
+                  {t.kategori_nama && <span style={{ color: 'var(--muted)', fontWeight: 400 }}> — {t.kategori_nama}</span>}
+                </div>
+                <div className="tk-meta">
+                  {t.wilayah_nama && <span>📍 {t.wilayah_nama}</span>}
+                  {t.assigned_to_nama && <span>🔧 {t.assigned_to_nama}</span>}
                   <span>
                     {new Date(t.created_at).toLocaleDateString('id-ID', {
-                      day: 'numeric',
-                      month: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit',
+                      day: 'numeric', month: 'short', year: 'numeric',
+                      hour: '2-digit', minute: '2-digit',
                     })}
                   </span>
-                </div>
-                <div className="flex items-center gap-0.5 text-[#0B57D0] font-bold group-hover:translate-x-1 transition-transform">
-                  <span>Detail</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
                 </div>
               </div>
             </Link>
           ))}
         </div>
-      ) : (
-        <div className="bg-white rounded-[14px] border border-[#E1E6EF] shadow-sm overflow-hidden">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-[#F8FAFC] text-slate-600 font-bold uppercase tracking-wider border-b border-[#E1E6EF]">
-              <tr>
-                <th className="px-4 py-3">Nomor Tiket</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Prioritas</th>
-                <th className="px-4 py-3">Pelanggan</th>
-                <th className="px-4 py-3">Wilayah</th>
-                <th className="px-4 py-3">Teknisi</th>
-                <th className="px-4 py-3 text-right">Aksi</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E1E6EF]">
-              {tickets.map((t) => (
-                <tr key={t.id} className="hover:bg-slate-50">
-                  <td className="px-4 py-2.5 font-mono font-bold text-[#0B57D0]">
-                    <Link href={`/tickets/${t.id}`}>{t.nomor_tiket}</Link>
-                  </td>
-                  <td className="px-4 py-2.5 whitespace-nowrap">
-                    <StatusBadge status={t.status} size="sm" />
-                  </td>
-                  <td className="px-4 py-2.5 whitespace-nowrap">
-                    <PriorityBadge prioritas={t.prioritas} />
-                  </td>
-                  <td className="px-4 py-2.5">
-                    <div className="font-bold text-slate-900">{t.nama_pelanggan}</div>
-                    <div className="text-[11px] text-slate-500 truncate max-w-xs">{t.kategori_nama}</div>
-                  </td>
-                  <td className="px-4 py-2.5 text-slate-600 whitespace-nowrap">
-                    {t.wilayah_nama?.split('-')[0] || t.wilayah_id}
-                  </td>
-                  <td className="px-4 py-2.5 font-semibold text-purple-700 whitespace-nowrap">
-                    {t.assigned_to_nama || '-'}
-                  </td>
-                  <td className="px-4 py-2.5 text-right whitespace-nowrap">
-                    <Link
-                      href={`/tickets/${t.id}`}
-                      className="px-3 py-1 rounded-lg bg-blue-50 text-[#0B57D0] hover:bg-blue-100 font-bold"
-                    >
-                      Buka
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       )}
 
-      {/* Floating Action Button (FAB) on Mobile */}
+      {/* FAB Mobile */}
       <Link
         href="/tickets/new"
-        className="min-[900px]:hidden fixed right-4 bottom-20 w-14 h-14 rounded-full text-white flex items-center justify-center shadow-xl z-40 active:scale-95 transition-transform"
+        className="min-[900px]:hidden"
         style={{
+          position: 'fixed', right: 16, bottom: 76, width: 52, height: 52, borderRadius: '50%',
           background: 'linear-gradient(135deg, #0A4CC0, #2A86F5)',
-          boxShadow: '0 8px 24px rgba(10, 76, 192, 0.4)',
+          boxShadow: '0 8px 24px rgba(10,76,192,.4)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 40,
+          textDecoration: 'none', color: '#fff',
         }}
         title="Buat Laporan Baru"
       >
-        <Plus className="w-8 h-8 stroke-[3]" />
+        <svg viewBox="0 0 24 24" fill="none" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ width: 26, height: 26, stroke: '#fff' }}>
+          <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
       </Link>
     </div>
   );

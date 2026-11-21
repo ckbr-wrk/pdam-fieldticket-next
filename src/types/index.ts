@@ -50,6 +50,7 @@ export interface Wilayah {
 
 export interface Ticket {
   id: string;
+  ticket_id: string;
   nomor_tiket: string;
   pelapor_id: string;
   pelapor_nama?: string;
